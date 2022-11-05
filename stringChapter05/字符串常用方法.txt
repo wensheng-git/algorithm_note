@@ -18,7 +18,7 @@ String s = "A,B,C,D";
 String[] ss = s.split(","); // {"A", "B", "C", "D"}
 4:substring方法
 substring(startIndex)=====================TODO:这里的不是小驼峰命名
-substring(startIndex,endIndex)前开后闭
+substring(startIndex,endIndex)前闭后开
 5:slice(JavaScript)
 和substring一样,不同在于支持负数操作,-1为最后一个位置
 

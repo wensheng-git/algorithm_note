@@ -37,13 +37,14 @@ public class PrintAllSubSequences {
 
     //这里是index后面所有的元素依次来试我这个位置...更具有变化性
     public static void process2(char[] str, int index, String path, List<String> ans){
-        //这里直接先收集.....而不是等于length再收集[即先收集不要的情况,要的时候调用了index+1,让下一层去收集上一层的结果]
+        //这一层收集不要index+1的结果..(如果出现了中间不要的情况[1,2,5]..3,4没有要,可以理解要第三个的时候,出现3没有要,回溯path没有+3,4同理,5时候选择了递归下一层,被ans接受)
         ans.add(path);
         if (index==str.length){
             return;
         }
         //逻辑，我要和不要
-        for (int i=index;i<str.length;i++){
+        for (int i=index;i<str.length;i++){//要第一个的可能性
+            //要了index再去要第二个index+1
             process2(str,i+1,path+str[i],ans);
         }
     }
