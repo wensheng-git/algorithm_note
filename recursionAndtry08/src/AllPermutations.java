@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author :zhangwensheng
@@ -24,17 +26,15 @@ public class AllPermutations {
             list.add(path);
             return;
         }
-        // TODO:还有问题??????????????????去重
-        boolean[] visited=new boolean[256];
-        for (int i=0;i<reset.size();i++){//还有多少个没有处理
-                if (!visited[str[i]]) {//我这个位置如果第一个选择了一个元素,第二次后面的元素和前面一样,那么我不用再去讨论这个元素作为这个位置的情况了
-                    visited[str[i]]=true;
-                    char cur = reset.get(i);
-                    reset.remove(i);
-                    // path不能放外面，不然不能回溯
-                    process1(str, reset, path + cur, list);
-                    reset.add(i, cur);//回溯（是保证答案的可靠）
-                }
+        Set<Character> hasChoose=new HashSet<>();//一层内共享:去重
+        for (int i=0;i<reset.size();i++){//代表可选择的大小，从到右边依次选
+            if (hasChoose.contains(reset.get(i))) continue;
+            hasChoose.add(reset.get(i));
+            char cur = reset.get(i);
+            reset.remove(i);
+            // path不能放外面，不然不能回溯
+            process1(str, reset, path + cur, list);
+            reset.add(i, cur);//回溯（是保证答案的可靠。。。回来去选第二个
         }
     }
 
@@ -63,7 +63,7 @@ public class AllPermutations {
     }
 
     public static void main(String[] args) {
-        String s="cbc";
+        String s="abc";
         char[] chars = s.toCharArray();
         String path="";
         List<String> list = new ArrayList<>();

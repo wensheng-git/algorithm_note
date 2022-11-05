@@ -31,12 +31,35 @@ public class PrintAllSubSequences {
         String yes=path+str[index];
         process(str,index+1,yes,ans);
     }
+
+
+    public static void process2(char[] str, int index, String path, List<String> ans){
+        if (index==str.length){
+            ans.add(path);
+            return;
+        }
+        //逻辑，我要和不要
+        for (int i=index;i<str.length;i++){
+            process2(str,i+1,path+str[i],ans);
+            //本来这里要回溯但是传递参数相加，自动回溯
+        }
+        // 这是以不要的为结尾的
+        ans.add(path);
+    }
+
     public static void main(String[] args) {
-        String s="abc";
+        String s="123";
         char[] str = s.toCharArray();
         String path="";
         List<String> list = new ArrayList<>();
         process(str,0,path,list);
+        for (String str1:list){
+            System.out.println(str1);
+        }
+        System.out.println("================");
+        list.clear();
+        path="";
+        process2(str,0,path,list);
         for (String str1:list){
             System.out.println(str1);
         }

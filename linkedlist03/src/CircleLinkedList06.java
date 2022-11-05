@@ -8,6 +8,8 @@
 * 相遇点到环口的距离是起点到环口的距离-----由于slow*2=fast变化得出
 * */
 public class CircleLinkedList06 {
+
+
     public static void main(String[] args) {
     }
     public static class ListNode{
