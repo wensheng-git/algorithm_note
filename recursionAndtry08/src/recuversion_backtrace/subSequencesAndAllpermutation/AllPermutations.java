@@ -1,3 +1,5 @@
+package recuversion_backtrace.subSequencesAndAllpermutation;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -26,15 +28,16 @@ public class AllPermutations {
             list.add(path);
             return;
         }
-        Set<Character> hasChoose=new HashSet<>();//一层内共享:去重
+        boolean[] visited = new boolean[256];
         for (int i=0;i<reset.size();i++){//代表可选择的大小，从到右边依次选
-            if (hasChoose.contains(reset.get(i))) continue;
-            hasChoose.add(reset.get(i));
-            char cur = reset.get(i);
-            reset.remove(i);
-            // path不能放外面，不然不能回溯
-            process1(str, reset, path + cur, list);
-            reset.add(i, cur);//回溯（是保证答案的可靠。。。回来去选第二个
+            if (!visited[reset.get(i)]) {
+                visited[reset.get(i)]=true;//一层元素已经被访问过了，就不要再作为开始了
+                char cur = reset.get(i);
+                reset.remove(i);
+                // path不能放外面，不然不能回溯
+                process1(str, reset, path + cur, list);
+                reset.add(i, cur);//回溯（是保证答案的可靠。。。回来去选第二个
+            }
         }
     }
 
@@ -63,7 +66,7 @@ public class AllPermutations {
     }
 
     public static void main(String[] args) {
-        String s="abc";
+        String s="acc";
         char[] chars = s.toCharArray();
         String path="";
         List<String> list = new ArrayList<>();

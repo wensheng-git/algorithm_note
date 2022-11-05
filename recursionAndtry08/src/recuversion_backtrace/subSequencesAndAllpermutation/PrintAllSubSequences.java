@@ -1,4 +1,7 @@
+package recuversion_backtrace.subSequencesAndAllpermutation;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -19,7 +22,7 @@ public class PrintAllSubSequences {
     * path: 我收集的一个子序列
     * ans：存放子序列
     * */
-    //类似这种全遍历的每个元素可以画树状图去理解
+    //更好理解.更简单(去重的时候需要借助)
     public static void process(char[] str, int index, String path, List<String> ans){
         if (index==str.length){
             ans.add(path);
@@ -32,23 +35,21 @@ public class PrintAllSubSequences {
         process(str,index+1,yes,ans);
     }
 
-
+    //这里是index后面所有的元素依次来试我这个位置...更具有变化性
     public static void process2(char[] str, int index, String path, List<String> ans){
+        //这里直接先收集.....而不是等于length再收集[即先收集不要的情况,要的时候调用了index+1,让下一层去收集上一层的结果]
+        ans.add(path);
         if (index==str.length){
-            ans.add(path);
             return;
         }
         //逻辑，我要和不要
         for (int i=index;i<str.length;i++){
             process2(str,i+1,path+str[i],ans);
-            //本来这里要回溯但是传递参数相加，自动回溯
         }
-        // 这是以不要的为结尾的
-        ans.add(path);
     }
 
     public static void main(String[] args) {
-        String s="123";
+        String s="1234";
         char[] str = s.toCharArray();
         String path="";
         List<String> list = new ArrayList<>();
