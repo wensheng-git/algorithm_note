@@ -49,7 +49,7 @@ public class MaxLenPublicSubSequence {
     *  其他情况：依赖【上格，左格和对顶格】======》base case把0行0列都填满了，
     *  dp[i][j]==>三种情况的最大值dp[i-1][j],dp[i][j-1],dp[i-1][j-1]+1===>取max
     * */
-    public int process(char[] str1,char[] str2){
+    public int process_dp(char[] str1,char[] str2){
         int[][] dp = new int[str1.length][str2.length];
         dp[0][0]=str1[0]==str2[0]?1:0;
         for (int j = 1; j < str2.length; j++) { //填第一行
