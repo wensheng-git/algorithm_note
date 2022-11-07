@@ -1,4 +1,4 @@
-package dp.dpmould.spacecompressskills;
+package dp.dpmould.space_compress_skillsAnd_delete_enum;
 
 /**
  * @author :zhangwensheng
