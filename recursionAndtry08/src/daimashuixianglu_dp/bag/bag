@@ -1,0 +1,22 @@
+有N件物品和一个最多能背重量为W的背包。第i件物品的重量是weight[i]，得到的价值是value[i]
+1:01背包：
+每件物品只能放一次，求MaxValue
+for(int i = 0; i < weight.size(); i++) { // 遍历物品
+    for(int j = bagWeight; j >= weight[i]; j--) { // 遍历背包容量
+        dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);
+    }
+}
+
+
+2：完全背包:dp[i][j]=dp[i-1][j](不要)+dp[i][j-w[i]]（要）+v[i]
+TODO：要的时候依赖上格。。不要的时候依赖的是本行的前面=============》所以对于一行来说，先填前面
+每件物品都有无限个（也就是可以放入背包多次）。
+for(int i = 0; i < weight.size(); i++) { // 遍历物品
+    for(int j = weight[i]; j <= bagWeight ; j++) { // 遍历背包容量
+        dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);
+    }
+}
+
+区别：
+01的是依赖上行的最前面；所以需要保留前面的数据。所以从后往前遍历
+完全bag，依赖本行的前面，所以先填前面。所以从前往后遍历

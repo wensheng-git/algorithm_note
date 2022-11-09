@@ -17,6 +17,9 @@ package dp.dpmould.LeftToRightMould;
  * base case:
  * index==arr.length return 0;
  * bag<0 返回-1  (上游作判断,无效解)
+ *
+ *
+ *
  */
 public class Bag {
 
@@ -37,6 +40,7 @@ public class Bag {
     //index:0~N
     //reset:0~bag
     //dp[N+1][bag+1]
+    //这里的dp定义是从[index,w.length-1]可以收集最大的价值
     public static int process_dp(int[] w,int[] v,int bag,int index){
         int[][] dp=new int[w.length+1][bag+1];
         //base case:
@@ -57,6 +61,21 @@ public class Bag {
         }
         return dp[0][bag];
     }
+
+
+
+
+
+
+
+
+    /*
+    * dp的另一种定义:[0,index]收集的最大价值
+    * 依赖: 要了index和不要index==>dp[index-1][bag-w[index]]+dp[index-1][bag]
+    * base case:bag=0的时候,value都是0;
+    * dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - weight[i - 1]] + value[i - 1]);
+    * dp[j]=Math.max(dp[j],dp[j-w[i]]+[i])...一维空间压缩后从右往左填(不然前面的会覆盖上一层的东西,,导致后面的元素依赖上层的时候,上层的东西已经不见了)
+    * */
 
     public static void main(String[] args) {
         int[] weights = { 3, 2, 4, 7, 3, 1, 7 };
